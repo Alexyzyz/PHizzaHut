@@ -19,4 +19,9 @@ Route::get('/register', 'PageController@register')->middleware('guest');
 Auth::routes();
 
 Route::get('/home', 'PageController@home');
-Route::get('/history', 'PageController@history');
+Route::post('/home', 'PageController@search_home');
+
+Route::get('/pizza-detail/{id}', 'PageController@pizza_detail');
+
+Route::get('/users', 'PageController@users');
+Route::get('/all-transactions', 'PageController@all_transactions');

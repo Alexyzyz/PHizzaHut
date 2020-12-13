@@ -14,44 +14,53 @@
     <div style="margin-bottom: 20px">
         <!-- Is this how you put elements side by side properly? I forgot. -->
         <!-- I hate how this looks -->
-        <div style="display: inline-block; margin-right: 10px">
-            <label for="search">Search pizza:</label>
-        </div>
-        <div style="display: inline-block; width: 33%">
-            <input id="search" type="text" class="form-control" name="search" value="{{ old('search') }}" placeholder="Enter pizza name" autocomplete="search">
-        </div>
-        <div style="display: inline-block">
-            <button type="submit" class="btn btn-primary">Search</button>
-        </div>
+        <form method="POST" action="{{ url('home') }}">
+            @csrf
+            <div style="display: inline-block; margin-right: 10px">
+                <label for="search">Search pizza:</label>
+            </div>
+            <div style="display: inline-block; width: 33%">
+                <input id="search" type="text" class="form-control" name="search" value="{{ old('search') }}" placeholder="Enter pizza name" autocomplete="search">
+            </div>
+            <div style="display: inline-block">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
     </div>
 
     <div>
         <!-- Two rows of pizzas -->
+        @if ($top_is_empty == false)
         <div class="row" style="margin-bottom: 20px">
-            @foreach ($pizzas_top as $item)
+            @foreach ($top_pizzas as $pizza)
             <div class="col">
-                <div class="card" style="padding: 5%">
-                    <h4>{{$item->name}}</h4>
-                    <p>Pizza price goes here.</p>
-                </div>
-            </div>
-            @endforeach
-        </div>
-
-        @if ($bottom_is_empty == false)
-        <div class="row" style="margin-bottom: 20px">
-            @foreach ($pizzas_bottom as $item)
-            <div class="col">
-                <div class="card" style="padding: 5%">
-                    <h4>{{$item->name}}</h4>
-                    <p>Pizza price goes here.</p>
+                <div class="card border-secondary mb-3" style="padding: 20px">
+                    <img src="/assets/{{$pizza->image}}" style="width: 200px; height: 200px; margin-bottom: 10px">
+                    <h4><a href="{{url('pizza-detail/'.$pizza->id)}}" style="color: black">{{$pizza->name}}</a></h4>
+                    <p style="height: 100px">{{$pizza->description}}</p>
+                    <p><b>Rp. {{$pizza->price}}</b></p>
                 </div>
             </div>
             @endforeach
         </div>
         @endif
 
-        {{$pizzas_top->links()}}
+        @if ($bottom_is_empty == false)
+        <div class="row" style="margin-bottom: 20px">
+            @foreach ($bottom_pizzas as $pizza)
+            <div class="col">
+                <div class="card border-secondary mb-3" style="padding: 20px">
+                    <img src="/assets/{{$pizza->image}}" style="width: 200px; height: 200px; margin-bottom: 10px">
+                    <h4><a href="{{url('pizza-detail/'.$pizza->id)}}" style="color: black">{{$pizza->name}}</a></h4>
+                    <p style="height: 100px">{{$pizza->description}}</p>
+                    <p><b>Rp. {{$pizza->price}}</b></p>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        @endif
+
+        {{$top_pizzas->links()}}
     </div>
 
 </div>
