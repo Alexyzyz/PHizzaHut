@@ -8,6 +8,13 @@ Make sure you read the file **O202-COMP6144-PH03-00.docx** for the project's des
 ### What kind of name is that?
 It's not *my* idea.
 
+### To-do list
+Here's a bunch of things that still need to be done:
+
+- [ ] Update the database to include `Cart`
+- [ ] Add `Add Pizza`, `Edit Pizza`, and `Delete Pizza` pages for Admins
+- [ ] Add `Transactions` and `Cart` pages for Members
+
 ### Where's the class diagram?
 Here it is. Make sure you treat the database well :-)
 
