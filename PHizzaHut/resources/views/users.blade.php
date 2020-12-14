@@ -10,6 +10,12 @@
         <h3>Registered Users</h3>
     </div>
 
+    @if ($users_is_empty)
+    <div class="card border-secondary mb-3" style="padding: 20px">
+        <h5>No users so far :(</h5>
+        <p style="margin: 0px">See? I told you your pizza recipes are awful. Nobody wants them. Go write a novel or something.</p>
+    </div>
+    @else
     @foreach ($users as $user)
     <div class="card border-secondary mb-3" style="padding: 20px; margin-bottom: 20px">
         <h6>User ID {{$user->id}}</h6>
@@ -29,7 +35,13 @@
                     {{$user->email}}<br>
                     {{$user->address}}<br>
                     {{$user->phone}}<br>
-                    {{$user->gender}}<br>
+                    <!-- Lazy fix for capitalization -->
+                    @if ($user->gender == 'male')
+                        Male
+                    @else
+                        Female
+                    @endif
+                    <br>
                 </p>
             </div>
 
@@ -42,6 +54,7 @@
         </div>
     </div>
     @endforeach
+    @endif
 
 </div>
 

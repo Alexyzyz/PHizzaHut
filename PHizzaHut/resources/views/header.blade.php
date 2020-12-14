@@ -24,10 +24,10 @@
                 @guest
                     <!-- Only show these for Guests -->
                     <li class="nav-item active">
-                        <a class="nav-link text-light" href="{{url('login')}}">Login</a>
+                        <a class="nav-link text-light" href="/login">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="{{url('register')}}">Register</a>
+                        <a class="nav-link text-light" href="/register">Register</a>
                     </li>
                 @endguest
 
@@ -35,10 +35,10 @@
                     @if (Auth::user()->role == 'member')
                         <!-- Only show these for Members -->
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="{{url('transactions')}}">View Transaction History</a>
+                            <a class="nav-link text-light" href="/transactions">View Transaction History</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="{{url('cart')}}">View Cart</a>
+                            <a class="nav-link text-light" href="/cart">View Cart</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -59,10 +59,10 @@
                         <!-- Only show these for Admins -->                
                         <li class="nav-item dropdown">
                             <li class="nav-item">
-                                <a class="nav-link text-light" href="{{url('all-transactions')}}">View All User Transactions</a>
+                                <a class="nav-link text-light" href="/transactions/all">View All Transactions</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" href="{{url('users')}}">View All Users</a>
+                                <a class="nav-link text-light" href="/users">View All Users</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
