@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\CartItem;
+use App\Transaction;
+use App\TransactionDetail;
 
 use Auth;
 
@@ -55,8 +57,22 @@ class CartItemController extends Controller
     {
         $cart_items = Auth::user()->cart_item()->get();
 
+        // create the new transaction
+        $transaction = new Transaction();
+        $transaction->user_id = Auth::user()->id;
+        $transaction->datetime = now();
+
+        $transaction->save();
+
+        // create each transaction detail for the transaction
         foreach ($cart_items as $cart_item) {
-            // finish this today
+            $transaction_detail = new TransactionDetail();
+            $transaction_detail->transaction_id = $transaction->id;
+            $transaction_detail->pizza_id = $cart_item->pizza_id;
+            $transaction_detail->quantity = $cart_item->quantity;
+
+            $transaction_detail->save();
+
             $cart_item->delete();
         }
 

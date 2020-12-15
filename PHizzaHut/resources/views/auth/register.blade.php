@@ -84,6 +84,9 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                                <p style="margin: 0px; color: green">
+                                    (Must be 10 digits long.)
+                                </p>
                             </div>
                         </div>
 
@@ -99,19 +102,6 @@
                                 </label>
                                 <label for="other">Other
                                     <input id="other" type="radio" class="form-control" name="gender" value="other">
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Role radio button group -->
-                        <div class="form-group row">
-                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
-                            <div class="col-md-6">
-                                <label for="member">Member
-                                    <input id="member" type="radio" class="form-control" name="role" value="member" required>
-                                </label>
-                                <label for="admin">Admin
-                                    <input id="admin" type="radio" class="form-control" name="role" value="admin">
                                 </label>
                             </div>
                         </div>

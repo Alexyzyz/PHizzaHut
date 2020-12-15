@@ -56,9 +56,9 @@ class PageController extends Controller
             return view('cart', compact('list', 'list_is_empty'));
 
         foreach ($carts as $cart) {
-            // I HAVE NO IDEA WHY IT HAS TO BE THIS WAY TO WORK
-            // AND I HONESTLY DON'T CARE ANYMORE I JUST WANT SLEEP
-            $pizza = Pizza::find($cart->pizza_id)->first();
+            // i tried using $pizza = $cart->pizza()
+            // but it just won't work and i'm too tired to care
+            $pizza = Pizza::where('id', '=', $cart->pizza_id)->first();
 
             $total_price = $pizza->price * $cart->quantity;
             $item = [
@@ -138,9 +138,9 @@ class PageController extends Controller
 
         $list = array();
         foreach ($details as $detail) {
-            // this one behaves correctly
-            // i have no idea why the one above doesn't
-            $pizza = $detail->pizza()->first();
+            // again, i have no idea why i have to do this
+            // in order for this to work
+            $pizza = Pizza::where('id', '=', $detail->pizza_id)->first();
             
             $total_price = $pizza->price * $detail->quantity;
             $item = [

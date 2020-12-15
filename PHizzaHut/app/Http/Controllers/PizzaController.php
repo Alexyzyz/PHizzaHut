@@ -11,9 +11,9 @@ class PizzaController extends Controller
     // insert the new pizza into the database
     public function insert_pizza(Request $request) {
         $request->validate([
-            'name'          => 'min:20',
-            'price'         => 'numeric|min:10000',
-            'description'   => 'min:20'
+            'name'          => 'required|string|min:20',
+            'price'         => 'required|numeric|min:10000',
+            'description'   => 'required|string|min:20'
             // uhh idk how to insert images yet
         ]);
 
@@ -32,9 +32,9 @@ class PizzaController extends Controller
     public function update_pizza(Request $request, $id)
     {
         $request->validate([
-            'name'          => 'min:20',
-            'price'         => 'numeric|min:10000',
-            'description'   => 'min:20'
+            'name'          => 'required|string|min:20',
+            'price'         => 'required|numeric|min:10000',
+            'description'   => 'required|string|min:20'
             // uhh idk how to insert images yet
         ]);
 

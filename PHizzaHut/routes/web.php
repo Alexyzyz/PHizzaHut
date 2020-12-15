@@ -22,8 +22,6 @@ Auth::routes();
 // for members
 Route::get('/transactions', 'PageController@transactions')->middleware('role:member');
 
-Route::post('/pizza/{id}/add', 'CartItemController@insert_cart_item')->middleware('role:member');
-
 Route::get('/cart', 'PageController@cart')->middleware('role:member');
 Route::post('/cart', 'CartItemController@update_cart_item')->middleware('role:member');
 
@@ -32,9 +30,12 @@ Route::delete('/cart/delete/all', 'CartItemController@delete_all_cart_items')->m
 Route::patch('/cart/update/{id}', 'CartItemController@update_cart_item')->middleware('role:member');
 Route::delete('/cart/delete/{id}', 'CartItemController@delete_cart_item')->middleware('role:member');
 
+Route::post('/pizza/{id}/add', 'CartItemController@insert_cart_item')->middleware('role:member');
+
 // for admins
-Route::get('/users', 'PageController@users')->middleware('role:admin');
 Route::get('/transactions/all', 'PageController@all_transactions')->middleware('role:admin');
+
+Route::get('/users', 'PageController@users')->middleware('role:admin');
 
 Route::get('/pizza/add', 'PageController@add_pizza')->middleware('role:admin');
 Route::post('/pizza/add', 'PizzaController@insert_pizza')->middleware('role:admin');

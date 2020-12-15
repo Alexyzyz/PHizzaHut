@@ -12,12 +12,12 @@ class TransactionSeeder extends Seeder
     public function run()
     {
         \Illuminate\Support\Facades\DB::table('transactions')->insert([
-            'user_id'   => 1,
+            'user_id'   => 2,
             'datetime'  => now()
         ]);
 
         \Illuminate\Support\Facades\DB::table('transactions')->insert([
-            'user_id'   => 2,
+            'user_id'   => 3,
             'datetime'  => now()
         ]);
     }
