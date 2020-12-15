@@ -6,10 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pizza extends Model
 {
-    protected $fillable = [
-        'name', 'price', 'description', 'image',
-    ];
-
     public $timestamps = false;
 
     public function cart_item() {
