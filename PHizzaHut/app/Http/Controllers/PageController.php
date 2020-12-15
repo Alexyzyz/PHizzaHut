@@ -137,6 +137,8 @@ class PageController extends Controller
         $details = $transaction->transaction_detail()->get();
 
         $list = array();
+        $list_is_empty = $details->isEmpty();
+
         foreach ($details as $detail) {
             // again, i have no idea why i have to do this
             // in order for this to work
@@ -151,6 +153,6 @@ class PageController extends Controller
             array_push($list, $item);
         }
 
-        return view('transaction_detail', compact('list'));
+        return view('transaction_detail', compact('list', 'list_is_empty'));
     }
 }

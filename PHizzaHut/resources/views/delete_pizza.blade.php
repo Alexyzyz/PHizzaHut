@@ -9,7 +9,7 @@
         <div class="row">
             <!-- Image on the left -->
             <div class="col" style="margin-right: 20px">
-                <img src="/assets/{{$pizza->image}}" style="width: 100%; height: auto">
+                <img src="/../storage/images/{{$pizza->image}}" style="width: 100%; height: auto">
             </div>
 
             <!-- Everything else on the right -->

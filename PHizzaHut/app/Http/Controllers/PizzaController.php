@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Pizza;
 
+use Storage;
+
 class PizzaController extends Controller
 {
     // insert the new pizza into the database
@@ -13,19 +15,26 @@ class PizzaController extends Controller
         $request->validate([
             'name'          => 'required|string|min:20',
             'price'         => 'required|numeric|min:10000',
-            'description'   => 'required|string|min:20'
-            // uhh idk how to insert images yet
+            'description'   => 'required|string|min:20',
+            'image'         => 'filled'
         ]);
 
-        $pizza = new Pizza();
-        $pizza->name = $request->name;
-        $pizza->price = $request->price;
-        $pizza->description = $request->description;
-        $pizza->image = $request->image;
+        if($request->hasFile('image')) {
+            // deal with the image
+            $image = $request->file('image');
+            Storage::putFileAs('public/images', $image, $image->getClientOriginalName());
 
-        $pizza->save();
+            $pizza = new Pizza();
+            $pizza->name = $request->name;
+            $pizza->price = $request->price;
+            $pizza->description = $request->description;
+            $pizza->image = $image->getClientOriginalName();
+            
+            $pizza->save();
 
-        return redirect('home');
+            return redirect('home');
+        }
+        return back();
     }
 
     // edit the existing pizza in the database
@@ -34,25 +43,37 @@ class PizzaController extends Controller
         $request->validate([
             'name'          => 'required|string|min:20',
             'price'         => 'required|numeric|min:10000',
-            'description'   => 'required|string|min:20'
-            // uhh idk how to insert images yet
+            'description'   => 'required|string|min:20',
+            'image'         => 'filled'
         ]);
 
-        $pizza = Pizza::find($id);
-        $pizza->name = $request->name;
-        $pizza->price = $request->price;
-        $pizza->description = $request->description;
-        $pizza->image = $request->image;
+        if($request->hasFile('image')) {
+            // deal with the image
+            $image = $request->file('image');
+            Storage::putFileAs('public/images', $image, $image->getClientOriginalName());
 
-        $pizza->save();
+            $pizza = Pizza::find($id);
+            $pizza->name = $request->name;
+            $pizza->price = $request->price;
+            $pizza->description = $request->description;
+            $pizza->image = $image->getClientOriginalName();
+            
+            $pizza->save();
 
-        return redirect('home');
+            return redirect('home');
+        }
+        return back();
     }
 
     // delete the existing pizza from the database
     public function delete_pizza($id)
     {
         $pizza = Pizza::find($id);
+
+        if (is_file(storage_path() . '/images/' . $pizza->image)) {
+            unlink(storage_path() . '/images/' . $pizza->image);
+        }
+        
         $pizza->delete();
 
         return redirect('home');

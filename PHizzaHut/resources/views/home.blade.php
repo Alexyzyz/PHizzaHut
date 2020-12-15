@@ -29,11 +29,13 @@
             </div>
         </form>
 
+        @auth
         @if (Auth::user()->role == 'admin')
         <div style="margin-bottom: 10px">
             <a href="pizza/add" class="btn btn-primary btn-dark">Add Pizza</a>
         </div>
         @endif
+        @endauth
     </div>
 
     <div>
@@ -50,7 +52,7 @@
 
                 <!-- Pizza info -->
                 <div class="card border-secondary mb-3" style="padding: 20px">
-                    <img src="/assets/{{$pizza->image}}" style="width: 200px; height: 200px; margin-bottom: 10px">
+                    <img src="/../storage/images/{{$pizza->image}}" style="width: 200px; height: 200px; margin-bottom: 10px">
                     <h4>
                         <a href="pizza/{{$pizza->id}}" style="color: black">
                             {{$pizza->name}}
@@ -60,12 +62,14 @@
                     <p><b>Rp. {{$pizza->price}}</b></p>
 
                     <!-- Admin only -->
+                    @auth
                     @if (Auth::user()->role == 'admin')
                         <div>
                             <a href="pizza/{{$pizza->id}}/edit" class="btn btn-primary" style="display: inline-block">Edit Pizza</a>
                             <a href="pizza/{{$pizza->id}}/delete" class="btn btn-primary btn-danger" style="display: inline-block">Delete Pizza</a>
                         </div>
                     @endif
+                    @endauth
                 </div>
 
             </div>
@@ -80,7 +84,7 @@
 
                 <!-- Pizza info -->
                 <div class="card border-secondary mb-3" style="padding: 20px">
-                    <img src="/assets/{{$pizza->image}}" style="width: 200px; height: 200px; margin-bottom: 10px">
+                    <img src="/../storage/images/{{$pizza->image}}" style="width: 200px; height: 200px; margin-bottom: 10px">
                     <h4>
                         <a href="pizza/{{$pizza->id}}" style="color: black">
                             {{$pizza->name}}
@@ -90,12 +94,14 @@
                     <p><b>Rp. {{$pizza->price}}</b></p>
 
                     <!-- Admin only -->
+                    @auth
                     @if (Auth::user()->role == 'admin')
                         <div>
                             <a href="pizza/{{$pizza->id}}/edit" class="btn btn-primary" style="display: inline-block">Edit Pizza</a>
                             <a href="pizza/{{$pizza->id}}/delete" class="btn btn-primary btn-danger" style="display: inline-block">Delete Pizza</a>
                         </div>
                     @endif
+                    @endauth
                 </div>
 
             </div>

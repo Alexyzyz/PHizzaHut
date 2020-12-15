@@ -14,12 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 // for guests
+
 Route::get('/', 'PageController@login')->middleware('guest');
 Route::get('/register', 'PageController@register')->middleware('guest');
 
 Auth::routes();
 
 // for members
+
 Route::get('/transactions', 'PageController@transactions')->middleware('role:member');
 
 Route::get('/cart', 'PageController@cart')->middleware('role:member');
@@ -33,6 +35,7 @@ Route::delete('/cart/delete/{id}', 'CartItemController@delete_cart_item')->middl
 Route::post('/pizza/{id}/add', 'CartItemController@insert_cart_item')->middleware('role:member');
 
 // for admins
+
 Route::get('/transactions/all', 'PageController@all_transactions')->middleware('role:admin');
 
 Route::get('/users', 'PageController@users')->middleware('role:admin');
@@ -47,9 +50,12 @@ Route::get('/pizza/{id}/delete', 'PageController@delete_pizza')->middleware('rol
 Route::delete('/pizza/{id}/delete', 'PizzaController@delete_pizza')->middleware('role:admin');
 
 // for members and admins
+
+Route::get('/transactions/{id}', 'PageController@transaction_detail')->middleware('role:admin,member');
+
+// for guests, members, and admins
+
 Route::get('/home', 'PageController@home');
 Route::post('/home', 'HomeController@search');
 
-Route::get('/pizza/{id}', 'PageController@pizza_detail')->middleware('role:admin,member');
-
-Route::get('/transactions/{id}', 'PageController@transaction_detail')->middleware('role:admin,member');
+Route::get('/pizza/{id}', 'PageController@pizza_detail');

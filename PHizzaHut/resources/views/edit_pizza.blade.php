@@ -9,7 +9,7 @@
         <div class="row">
             <!-- Image on the left -->
             <div class="col" style="margin-right: 20px">
-                <img src="/assets/{{$pizza->image}}" style="width: 100%; height: auto">
+                <img src="/../storage/images/{{$pizza->image}}" style="width: 100%; height: auto">
             </div>
 
             <!-- Everything else on the right -->
@@ -24,7 +24,7 @@
                     <p><b>Rp. {{$pizza->price}}</b></p>
                 </div>
         
-                <form method="POST" action="/pizza/{{$pizza->id}}/edit">
+                <form method="POST" action="/pizza/{{$pizza->id}}/edit" enctype="multipart/form-data">
                     @method('patch')
                     @csrf
                     <div>
@@ -74,20 +74,14 @@
         
                         <div>
                             <!-- Pizza image field -->
-                            <div style="display: inline-block; width: 150px; margin-top: 5px; margin-right: 20px">
-                                <label for="image" class="col-form-label">Pizza image</label>
+                            <div class="input-group" style="margin-top: 5px">
+                                <div style="display: inline-block; width: 150px; margin-top: 5px; margin-right: 20px">
+                                    <label for="image" class="col-form-label">Pizza image</label>
+                                </div>
+                                <div style="display: inline-block; width: 500px; margin-bottom: 5px">
+                                    <input type="file" id="image" name="image" accept="image/png, image/jpeg">
+                                </div>
                             </div>
-                            <div style="display: inline-block; width: 500px; margin-bottom: 5px">
-                                <input id="image" type="text" class="form-control" name="image" value="{{ old('image') }}" placeholder="Enter the pizza's new image" required>
-                                @error('image')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            @error('image')
-                            <div style="margin-bottom: 5px; color: #DC3545">* {{ $message }}</div>
-                            @enderror
                         </div>
         
                         <div style="margin-top: 15px;">

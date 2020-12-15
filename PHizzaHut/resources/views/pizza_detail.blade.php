@@ -8,7 +8,7 @@
     <div class="card" style="padding: 40px">
         <div class="row">
             <div class="col" style="margin-right: 20px">
-                <img src="/assets/{{$pizza->image}}" style="width: 100%; height: auto">
+                <img src="/../storage/images/{{$pizza->image}}" style="width: 100%; height: auto">
             </div>
 
             <div class="col">
@@ -16,6 +16,7 @@
                 <p>{{$pizza->description}}</p>
                 <p><b>Rp. {{$pizza->price}}</b></p>
 
+                @auth
                 @if (Auth::user()->role == 'member')
                 <form method="POST" action="/pizza/{{$pizza->id}}/add">
                     @csrf
@@ -39,6 +40,7 @@
                     </div>
                 </form>
                 @endif
+                @endauth
             </div>
         </div>
     </div>

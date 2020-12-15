@@ -10,7 +10,7 @@
             <h3>Add New Pizza</h3>
         </div>
 
-        <form method="POST" action="/pizza/add">
+        <form method="POST" action="/pizza/add" enctype="multipart/form-data">
             @csrf
             <div>
                 <div>
@@ -59,23 +59,15 @@
 
                 <div>
                     <!-- Pizza image field -->
-                    <div style="display: inline-block; width: 150px; margin-top: 5px; margin-right: 20px">
-                        <label for="image" class="col-form-label">Pizza image</label>
+                    <div style="margin-top: 20px; margin-right: 20px">
+                        <h6>Upload the pizza's image below</h6>
                     </div>
-                    <div style="display: inline-block; width: 500px; margin-bottom: 5px">
-                        <input id="image" type="text" class="form-control" name="image" value="{{ old('image') }}" placeholder="Enter the new pizza's image" required>
-                        @error('image')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                    <div style="margin-top: 20px;">
+                        <input type="file" id="image" name="image" accept="image/png, image/jpeg">
                     </div>
-                    @error('image')
-                    <div style="margin-bottom: 5px; color: #DC3545">* {{ $message }}</div>
-                    @enderror
                 </div>
 
-                <div style="margin-top: 15px;">
+                <div style="margin-top: 20px;">
                     <button type="submit" class="btn btn-primary">
                         Add Pizza
                     </button>

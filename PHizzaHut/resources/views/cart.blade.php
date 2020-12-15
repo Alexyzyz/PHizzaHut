@@ -19,7 +19,7 @@
     <div class="card border-secondary mb-3" style="padding: 20px; margin-bottom: 20px">
         <div class="row">
             <div class="col">
-                <img src="/assets/{{$item['pizza']->image}}" style="height: 100px; width: auto">
+                <img src="/../storage/images/{{$item['pizza']->image}}" style="height: 100px; width: auto">
             </div>
             <div class="col">
                 <h6>{{$item['pizza']->name}}</h6>

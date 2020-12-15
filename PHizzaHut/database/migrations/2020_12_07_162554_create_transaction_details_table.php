@@ -20,7 +20,8 @@ class CreateTransactionDetailsTable extends Migration
             $table->unsignedInteger('quantity');
 
             $table->foreign('transaction_id')->references('id')->on('transactions');
-            $table->foreign('pizza_id')->references('id')->on('pizzas');
+            $table->foreign('pizza_id')->references('id')->on('pizzas')->onDelete('cascade');
+            // i'm not completely sure if onDelete('cascade') is a good idea
         });
     }
 
