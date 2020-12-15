@@ -21,16 +21,18 @@ class PizzaController extends Controller
 
         if($request->hasFile('image')) {
             // deal with the image
-            $image = $request->file('image');
-            Storage::putFileAs('public/images', $image, $image->getClientOriginalName());
-
             $pizza = new Pizza();
             $pizza->name = $request->name;
             $pizza->price = $request->price;
             $pizza->description = $request->description;
-            $pizza->image = $image->getClientOriginalName();
-            
+            $pizza->image = '';
             $pizza->save();
+
+            $pizza->image = 'pizza_' . $pizza->id . '.png';
+            $pizza->save();
+
+            $image = $request->file('image');
+            Storage::putFileAs('public/images', $image, $pizza->image);
 
             return redirect('home');
         }
@@ -49,16 +51,18 @@ class PizzaController extends Controller
 
         if($request->hasFile('image')) {
             // deal with the image
-            $image = $request->file('image');
-            Storage::putFileAs('public/images', $image, $image->getClientOriginalName());
-
             $pizza = Pizza::find($id);
             $pizza->name = $request->name;
             $pizza->price = $request->price;
             $pizza->description = $request->description;
-            $pizza->image = $image->getClientOriginalName();
-            
+            $pizza->image = '';
             $pizza->save();
+
+            $pizza->image = 'pizza_' . $pizza->id . '.png';
+            $pizza->save();
+
+            $image = $request->file('image');
+            Storage::putFileAs('public/images', $image, $pizza->image);
 
             return redirect('home');
         }
@@ -70,8 +74,8 @@ class PizzaController extends Controller
     {
         $pizza = Pizza::find($id);
 
-        if (is_file(storage_path() . '/images/' . $pizza->image)) {
-            unlink(storage_path() . '/images/' . $pizza->image);
+        if (is_file(storage_path() . '/app/public/images/' . $pizza->image)) {
+            unlink(storage_path() . '/app/public/images/' . $pizza->image);
         }
         
         $pizza->delete();
